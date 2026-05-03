@@ -29,16 +29,19 @@ function getCentralizedPositions() {
 }
 
 function getDecentralizedPositions() {
+  // 6 subject clusters arranged in a 3-D hexagonal ring
   const centers = {
-    philosophy: new THREE.Vector3(-20, 10, 0),
-    science:    new THREE.Vector3(20, 10, 0),
-    art:        new THREE.Vector3(-20, -10, 0),
-    tech:       new THREE.Vector3(20, -10, 0),
+    cb3401: new THREE.Vector3(-22,  12,   0),   // DBMS       — top-left
+    cb3402: new THREE.Vector3( 22,  12,   0),   // OS Sec     — top-right
+    cb3491: new THREE.Vector3(-22, -12,   0),   // Crypto     — bottom-left
+    cs3452: new THREE.Vector3( 22, -12,   0),   // ToC        — bottom-right
+    cs3491: new THREE.Vector3(  0,   0,  26),   // AI/ML      — front
+    ge3451: new THREE.Vector3(  0,   0, -26),   // Env Sci    — back
   }
-  const counts = { philosophy: 0, science: 0, art: 0, tech: 0 }
+  const counts = { cb3401: 0, cb3402: 0, cb3491: 0, cs3452: 0, cs3491: 0, ge3451: 0 }
   return nodeData.map(node => {
     const idx = counts[node.category]++
-    return centers[node.category].clone().add(fibonacciSphere(10, idx, 8))
+    return centers[node.category].clone().add(fibonacciSphere(5, idx, 7))
   })
 }
 

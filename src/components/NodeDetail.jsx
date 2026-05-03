@@ -32,14 +32,19 @@ export default function NodeDetail() {
         ✕
       </button>
 
-      {/* Category badge */}
-      <div>
+      {/* Subject badge */}
+      <div className="flex items-center gap-2 flex-wrap">
         <span
-          className="text-[9px] tracking-[0.25em] px-2 py-0.5 rounded-full border"
+          className="text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-full border"
           style={{ color, borderColor: `${color}66`, background: `${color}11` }}
         >
           {CATEGORY_LABELS[selectedNode.category]}
         </span>
+        {selectedNode.subject && (
+          <span className="text-[9px] text-cyber-dim/60 tracking-wider">
+            {selectedNode.subject}
+          </span>
+        )}
       </div>
 
       {/* Node title */}
@@ -91,9 +96,22 @@ export default function NodeDetail() {
         </div>
       )}
 
-      {/* Node ID chip */}
-      <div className="text-[8px] text-cyber-dim/40 tracking-widest">
-        NODE · {String(selectedNode.id).padStart(3, '0')}
+      {/* Metadata row */}
+      <div className="flex items-center justify-between">
+        <span className="text-[8px] text-cyber-dim/40 tracking-widest">
+          NODE · {String(selectedNode.id).padStart(3, '0')}  ·  UNIT {selectedNode.unit}
+        </span>
+
+        {/* Open in Obsidian */}
+        {selectedNode.obsidianUri && (
+          <a
+            href={selectedNode.obsidianUri}
+            title="Open in Obsidian"
+            className="text-[9px] px-2 py-0.5 rounded border border-cyber-border text-cyber-dim hover:border-cyber-cyan hover:text-cyber-cyan transition-colors"
+          >
+            ⌁ OBSIDIAN
+          </a>
+        )}
       </div>
     </div>
   )
